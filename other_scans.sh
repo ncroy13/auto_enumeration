@@ -42,6 +42,10 @@ then
     touch ./open-ports/500.txt
 fi
 
+if [ ! -d ./nse_scans ]
+then
+    mkdir -p ./nse_scans
+fi
 scan(){
     if [ $(cat open-ports/500.txt | wc -l) -eq '0' ];
     then
