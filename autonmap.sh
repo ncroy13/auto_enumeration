@@ -19,7 +19,6 @@ fi
 #-- check for nmap
 if ! which nmap > /dev/null
 then
-    # echo out nmap not installed or not in $PATH
     echo -e "\n[${RED}!${RESET}] nmap ${RED}not${RESET} found"
     exit 1
 fi
@@ -74,10 +73,18 @@ MINHOST=$1
 if  [[ -z "$MINHOST" ]]; then
     read -p "--min-hostgroup (256): " MINHOST
 fi
+if [[ -z "$MINHOST" ]];
+then
+    MINHOST=256
+fi
 
 MINRATE=$2
 if  [[ -z "$MINRATE" ]]; then
     read -p "--min-rate (2000): " MINRATE
+fi
+if [[ -z "$MINRATE" ]];
+then
+    MINRATE=2000
 fi
 
 #-- functions go here
