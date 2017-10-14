@@ -1,0 +1,7 @@
+targets.ip
+exclude.ip
+alive.ip
+open-ports
+scans
+open-ports/*
+scans/*
