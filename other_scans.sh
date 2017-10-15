@@ -46,6 +46,25 @@ if [ ! -d ./nse_scans ]
 then
     mkdir -p ./nse_scans
 fi
+
+MINHOST=$1
+if  [[ -z "$MINHOST" ]]; then
+    read -p "--min-hostgroup (256): " MINHOST
+fi
+if [[ -z "$MINHOST" ]];
+then
+    MINHOST=256
+fi
+
+MINRATE=$2
+if  [[ -z "$MINRATE" ]]; then
+    read -p "--min-rate (2000): " MINRATE
+fi
+if [[ -z "$MINRATE" ]];
+then
+    MINRATE=2000
+fi
+
 scan(){
     if [ $(cat open-ports/500.txt | wc -l) -eq '0' ];
     then
