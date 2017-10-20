@@ -75,7 +75,7 @@ scan(){
 	     --stats-every 60s --min-hostgroup $MINHOST --min-rate=$MINRATE
 	for ip in $(cat open-ports/500.txt)
 	do	    
-	    ike-scan -A -M $ip --id=GroupVPN >> nse_scans/IKE-$ip.txt
+	    ike-scan -A -M $ip --id=GroupVPN | tee -a nse_scans/IKE-$ip.txt
 	done
     fi
 
@@ -86,10 +86,10 @@ scan(){
 	for ip in $(cat open-ports/443.txt)
 	do
 	    curl -v https://$ip/ -H "Host: hostname" \
-		 -H "Range: bytes=0-18446744073709551615" -k >> nse_scans/MS15034/$ip.txt
+		 -H "Range: bytes=0-18446744073709551615" -k | tee -a nse_scans/MS15034-$ip.txt
 	done
     fi            
 }
 
 #-- call function
-scans
+scan
