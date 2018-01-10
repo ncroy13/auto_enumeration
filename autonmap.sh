@@ -141,7 +141,7 @@ nse(){
 	echo -e "\n[${GREEN}+${RESET}] nothing for port ${YELLOW}23${RESET}"
     else
 	nmap -sC -sV -p 23 -iL open-ports/23.txt \
-	     --script=telnet-encryption,banner -oN nse_scans/telnet \
+	     --script=telnet-encryption,banner,tn3270-info,tn3270_screen -oN nse_scans/telnet \
 	     --stats-every 60s --min-hostgroup $MINHOST --min-rate=$MINRATE
     fi
     if [ $(cat open-ports/25.txt | wc -l) -eq '0' ];
@@ -165,7 +165,7 @@ nse(){
 	echo -e "\n[${GREEN}+${RESET}] nothing for port ${YELLOW}80${RESET}"
     else   
 	nmap -sC -sV -p 80 -iL open-ports/80.txt \
-	     --script=http-enum,http-title,http-methods,http-robots.txt,http-trace -d -oN nse_scans/http \
+	     --script=http-enum,http-title,http-methods,http-robots.txt,http-trace,http-security-headers,http-shellshock.http-vuln-cve2017-5638,http-dombased-xss,http-phpself-xss -d -oN nse_scans/http \
 	     --stats-every 60s --min-hostgroup $MINHOST --min-rate=$MINRATE
     fi
     if [ $(cat open-ports/110.txt | wc -l) -eq '0' ];
@@ -205,11 +205,11 @@ nse(){
 	echo -e "\n[${GREEN}+${RESET}] nothing for port ${YELLOW}443${RESET}"
     else
 	nmap -sC -sV -p 443 -iL open-ports/443.txt \
-	     --script=http-title,http-methods,http-robots.txt,http-trace -d -oN nse_scans/https \
+	     --script=http-title,http-methods,http-robots.txt,http-trace,http-security-headers,http-shellshock,http-vuln-cve2017-5638,http-dombased-xss,http-phpself-xss -d -oN nse_scans/https \
 	     --stats-every 60s --min-hostgroup $MINHOST --min-rate=$MINRATE
 
 	nmap -sC -sV -p 443 -iL open-ports/443.txt --version-light \
-	 --script=ssl-poodle,ssl-heartbleed,ssl-enum-ciphers --script-args vulns.showall -oN nse_scans/ssl \
+	 --script=ssl-poodle,ssl-heartbleed,ssl-enum-ciphers,ssl-cert-intaddr --script-args vulns.showall -oN nse_scans/ssl \
 	 --stats-every 60s --min-hostgroup $MINHOST --min-rate=$MINRATE
     fi
     if [ $(cat open-ports/445.txt | wc -l) -eq '0' ];
@@ -217,7 +217,7 @@ nse(){
 	echo -e "\n[${GREEN}+${RESET}] nothing for port ${YELLOW}445${RESET}"
     else
 	nmap -sC -sV  -p 445 -iL open-ports/445.txt \
-	     --script=smb-enum-shares.nse,smb-os-discovery.nse,smb-enum-users.nse,smb-security-mode -oN nse_scans/smb \
+	     --script=smb-enum-shares.nse,smb-os-discovery.nse,smb-enum-users.nse,smb-security-mode,smb-vuln-ms17-010,smb2-vuln-uptime -oN nse_scans/smb \
 	     --stats-every 60s --min-hostgroup $MINHOST --min-rate=$MINRATE
     fi
     if [ $(cat open-ports/1521.txt | wc -l) -eq '0' ];
@@ -253,7 +253,7 @@ nse(){
 	echo -e "\n[${GREEN}+${RESET}] nothing for port ${YELLOW}5900${RESET}"
     else
 	nmap -sC -sV -p 5900 -iL open-ports/5900.txt \
-	     --script=vnc-brute,banner -oN nse_scans/vnc \
+	     --script=vnc-brute,banner,vnc-title -oN nse_scans/vnc \
 	     --stats-every 60s --min-hostgroup $MINHOST --min-rate=$MINRATE
     fi
     if [ $(cat open-ports/8080.txt | wc -l) -eq '0' ];
@@ -261,7 +261,7 @@ nse(){
 	echo -e "\n[${GREEN}+${RESET}] nothing for port ${YELLOW}8080${RESET}"
     else
 	nmap -sC -sV -p 8080 -iL open-ports/8080.txt \
-	     --script=http-title,http-robots.txt,http-methods -oN nse_scans/http8080 \
+	     --script=http-title,http-robots.txt,http-methods,http-security-headers,http-shellshock,http-vuln-cve2017-5638,http-dombased-xss,http-phpself-xss -oN nse_scans/http8080 \
 	     --stats-every 60s --min-hostgroup $MINHOST --min-rate=$MINRATE
     fi
     if [ $(cat open-ports/8443.txt | wc -l) -eq '0' ];
@@ -269,7 +269,7 @@ nse(){
 	echo -e "\n[${GREEN}+${RESET}] nothing for port ${YELLOW}8443${RESET}"
     else
 	nmap -sC -sV -p 8443 -iL open-ports/8443.txt \
-	     --script=http-title,http-robots.txt,http-methods -oN nse_scans/https8443 \
+	     --script=http-title,http-robots.txt,http-methods,http-security-headers,http-shellshock,http-vuln-cve2017-5638,http-dombased-xss,http-phpself-xss -oN nse_scans/https8443 \
 	     --stats-every 60s --min-hostgroup $MINHOST --min-rate=$MINRATE
     fi
     if [ $(cat open-ports/27017.txt | wc -l) -eq '0' ];
