@@ -165,7 +165,7 @@ nse(){
 	echo -e "\n[${GREEN}+${RESET}] nothing for port ${YELLOW}80${RESET}"
     else   
 	nmap -sC -sV -p 80 -iL open-ports/80.txt \
-	     --script=http-enum,http-title,http-methods,http-robots.txt,http-trace,http-security-headers,http-shellshock.http-vuln-cve2017-5638,http-dombased-xss,http-phpself-xss -d -oN nse_scans/http \
+	     --script=http-enum,http-title,http-methods,http-robots.txt,http-trace,http-shellshock.http-vuln-cve2017-5638,http-dombased-xss,http-phpself-xss -d -oN nse_scans/http \
 	     --stats-every 60s --min-hostgroup $MINHOST --min-rate=$MINRATE
     fi
     if [ $(cat open-ports/110.txt | wc -l) -eq '0' ];
@@ -205,7 +205,7 @@ nse(){
 	echo -e "\n[${GREEN}+${RESET}] nothing for port ${YELLOW}443${RESET}"
     else
 	nmap -sC -sV -p 443 -iL open-ports/443.txt \
-	     --script=http-title,http-methods,http-robots.txt,http-trace,http-security-headers,http-shellshock,http-vuln-cve2017-5638,http-dombased-xss,http-phpself-xss -d -oN nse_scans/https \
+	     --script=http-title,http-methods,http-robots.txt,http-trace,http-shellshock,http-vuln-cve2017-5638,http-dombased-xss,http-phpself-xss -d -oN nse_scans/https \
 	     --stats-every 60s --min-hostgroup $MINHOST --min-rate=$MINRATE
 
 	nmap -sC -sV -p 443 -iL open-ports/443.txt --version-light \
@@ -261,7 +261,7 @@ nse(){
 	echo -e "\n[${GREEN}+${RESET}] nothing for port ${YELLOW}8080${RESET}"
     else
 	nmap -sC -sV -p 8080 -iL open-ports/8080.txt \
-	     --script=http-title,http-robots.txt,http-methods,http-security-headers,http-shellshock,http-vuln-cve2017-5638,http-dombased-xss,http-phpself-xss -oN nse_scans/http8080 \
+	     --script=http-title,http-robots.txt,http-methods,http-shellshock,http-vuln-cve2017-5638,http-dombased-xss,http-phpself-xss -oN nse_scans/http8080 \
 	     --stats-every 60s --min-hostgroup $MINHOST --min-rate=$MINRATE
     fi
     if [ $(cat open-ports/8443.txt | wc -l) -eq '0' ];
@@ -269,7 +269,7 @@ nse(){
 	echo -e "\n[${GREEN}+${RESET}] nothing for port ${YELLOW}8443${RESET}"
     else
 	nmap -sC -sV -p 8443 -iL open-ports/8443.txt \
-	     --script=http-title,http-robots.txt,http-methods,http-security-headers,http-shellshock,http-vuln-cve2017-5638,http-dombased-xss,http-phpself-xss -oN nse_scans/https8443 \
+	     --script=http-title,http-robots.txt,http-methods,http-shellshock,http-vuln-cve2017-5638,http-dombased-xss,http-phpself-xss -oN nse_scans/https8443 \
 	     --stats-every 60s --min-hostgroup $MINHOST --min-rate=$MINRATE
     fi
     if [ $(cat open-ports/27017.txt | wc -l) -eq '0' ];
