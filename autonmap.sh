@@ -165,7 +165,7 @@ nse(){
 	echo -e "\n[${GREEN}+${RESET}] nothing for port ${YELLOW}80${RESET}"
     else   
 	nmap -sC -sV -p 80 -iL open-ports/80.txt \
-	     --script=http-enum,http-title,http-methods,http-robots.txt,http-trace,http-shellshock.http-vuln-cve2017-5638,http-dombased-xss,http-phpself-xss -d -oN nse_scans/http \
+	     --script=http-enum,http-title,http-methods,http-robots.txt,http-trace,http-shellshock,http-vuln-cve2017-5638,http-dombased-xss,http-phpself-xss -d -oN nse_scans/http \
 	     --stats-every 60s --min-hostgroup $MINHOST --min-rate=$MINRATE
     fi
     if [ $(cat open-ports/110.txt | wc -l) -eq '0' ];
