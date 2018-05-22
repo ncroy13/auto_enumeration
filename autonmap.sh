@@ -165,7 +165,8 @@ nse(){
 	echo -e "\n[${GREEN}+${RESET}] nothing for port ${YELLOW}80${RESET}"
     else   
 	nmap -sC -sV -p 80 -iL open-ports/80.txt \
-	     --script=http-enum,http-title,http-methods,http-robots.txt,http-trace,http-shellshock,http-vuln-cve2017-5638,http-dombased-xss,http-phpself-xss -d -oN nse_scans/http \
+	     --script=http-enum,http-title,http-methods,http-robots.txt,http-trace,http-shellshock,http-vuln-cve2017-5638,http-dombased-xss,http-phpself-xss,http-wordpress-enum,http-wordpress-users \
+	     -oN nse_scans/http \
 	     --stats-every 60s --min-hostgroup $MINHOST --min-rate=$MINRATE
     fi
     if [ $(cat open-ports/110.txt | wc -l) -eq '0' ];
@@ -205,7 +206,8 @@ nse(){
 	echo -e "\n[${GREEN}+${RESET}] nothing for port ${YELLOW}443${RESET}"
     else
 	nmap -sC -sV -p 443 -iL open-ports/443.txt \
-	     --script=http-title,http-methods,http-robots.txt,http-trace,http-shellshock,http-vuln-cve2017-5638,http-dombased-xss,http-phpself-xss -d -oN nse_scans/https \
+	     --script=http-title,http-methods,http-robots.txt,http-trace,http-shellshock,http-vuln-cve2017-5638,http-dombased-xss,http-phpself-xss,http-wordpress-enum \
+	     -oN nse_scans/https \
 	     --stats-every 60s --min-hostgroup $MINHOST --min-rate=$MINRATE
 
 	nmap -sC -sV -p 443 -iL open-ports/443.txt --version-light \
@@ -217,7 +219,7 @@ nse(){
 	echo -e "\n[${GREEN}+${RESET}] nothing for port ${YELLOW}445${RESET}"
     else
 	nmap -sC -sV  -p 445 -iL open-ports/445.txt \
-	     --script=smb-enum-shares.nse,smb-os-discovery.nse,smb-enum-users.nse,smb-security-mode,smb-vuln-ms17-010,smb2-vuln-uptime -oN nse_scans/smb \
+	     --script=smb-enum-shares.nse,smb-os-discovery.nse,smb-enum-users.nse,smb-security-mode,smb-vuln-ms17-010,smb-vuln-ms08-067,smb2-vuln-uptime -oN nse_scans/smb \
 	     --stats-every 60s --min-hostgroup $MINHOST --min-rate=$MINRATE
     fi
     if [ $(cat open-ports/1521.txt | wc -l) -eq '0' ];
@@ -281,6 +283,13 @@ nse(){
 	     --stats-every 60s --min-hostgroup $MINHOST --min-rate=$MINRATE
     fi
 }
+summary(){
+    echo -e "\n[${GREEN}+${RESET}] there are $(cat ./alive.ip | wc -l ) ${YELLOW}alive hosts${RESET} and $(egrep -o '[0-9]*/open/' scans/portscan.gnmap | sort | uniq | wc -l) ${YELLOW}unique ports/services${RESET}"
+    for ip in $(cat ./alive.ip); do
+	echo -e $ip > ./open-ports/$ip.txt
+	awk \/$ip\/ scans/portscan.gnmap | egrep -o '*[0-9]*/open/*[tcp/udp]*/' | sort | uniq | awk -F '/' '{print $1"/"$3}' >> ./open-ports/$ip.txt
+    done
+}
 #-- calling functions
 echo -e "\n[${GREEN}+${RESET}] running a ${YELLOW}ping sweep${RESET} for all ip in targets.ip"
 pingsweep
@@ -290,3 +299,5 @@ echo -e "\n[${GREEN}+${RESET}] running a ${YELLOW}parser${RESET} for the nse sca
 parser
 echo -e "\n[${GREEN}+${RESET}] running all then ${YELLOW}nse${RESET} scans "
 nse
+echo -e "\n[${GREEN}+${RESET}] to ${YELLOW}summarise${RESET} "
+summary

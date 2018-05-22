@@ -1,0 +1,26 @@
+#+TITLE: Autonmap_bash
+
+- Rewirte of [[https://github.com/sno0ose/auto_nmap][auto_nmap]]
+
+* Usage
+First run =autonmap.sh=
+
+#+BEGIN_SRC shell :results silent
+sudo ./autonmap.sh
+#+END_SRC
+
+Next populate the =targets.ip= file
+
+#+BEGIN_SRC shell :results silent
+echo "192.168.100.0/24" >> targets.ip
+#+END_SRC
+
+Finally run =autonmap.sh= once again
+
+#+BEGIN_SRC shell :results silent
+sudo ./autonmap.sh 256 2000
+#+END_SRC
+
+If you missed the arguments to the script you /should/ be asked for them.
+
+
