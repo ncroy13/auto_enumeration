@@ -3,16 +3,10 @@
 - Rewirte of [[https://github.com/sno0ose/auto_nmap][auto_nmap]]
 
 * Usage
-First run =autonmap.sh= or =automasscan.sh=
+First run =autoenum.sh=
 
 #+BEGIN_SRC shell :results silent
-sudo ./autonmap.sh
-#+END_SRC
-
-or 
-
-#+BEGIN_SRC shell :results silent
-sudo ./autmasscan.sh
+sudo ./autoenum.sh
 #+END_SRC
 
 Next populate the =targets.ip= file
@@ -21,18 +15,10 @@ Next populate the =targets.ip= file
 echo "192.168.100.0/24" >> targets.ip
 #+END_SRC
 
-Finally run =autonmap.sh= or =automasscan.sh= once again
+Finally run =autoenum.sh= again
 
 #+BEGIN_SRC shell :results silent
-sudo ./autonmap.sh 256 2000
-#+END_SRC
-
-or 
-
-#+BEGIN_SRC shell :results silent
-sudo ./automasscan.sh 100000
+sudo ./autoenum.sh 256 2000 100000
 #+END_SRC
 
 If you missed the arguments to the script you /should/ be asked for them.
-
-

@@ -40,19 +40,19 @@ then
     exit 1
 fi
 
-if [ ! -d ./scans ]
+if [ ! -d ./masscan/scans ]
 then
-    mkdir -p ./scans/
+    mkdir -p ./masscan/scans/
 fi
 
-if [ ! -d ./open-ports ]
+if [ ! -d ./masscan/open-ports ]
 then
-    mkdir -p ./open-ports
+    mkdir -p ./masscan/open-ports
 fi
 
-if [ ! -d ./nse_scans ]
+if [ ! -d ./masscan/nse_scans ]
 then
-    mkdir -p ./nse_scans
+    mkdir -p ./masscan/nse_scans
 fi
 
 MAXRATE=$1
@@ -69,27 +69,28 @@ masscanResolver(){
     do
 	if [ $(dig +short $item |wc -l) -eq '0' ];
 	then
-	    echo -e $item >> alive.ip
+	    echo -e $item >> masscan/alive.ip
 	else
-	    echo -e "$(dig +short $item | sort -u| tr -s ' ' '\n')" >> alive.ip
+	    echo -e "$(dig +short $item | sort -u| tr -s ' ' '\n')" >> masscan/alive.ip
 	fi
     done
     
 }
 
 portscanallports(){
-    masscan --open -iL alive.ip \
-	 -oG scans/portscanAll.gnmap -v \
+    masscan --open -iL masscan/alive.ip \
+	 -oG masscan/scans/portscanAll.gnmap -v \
 	 -p 0-65535 \
 	 --max-rate=$MAXRATE
 }
 
-source ./selectivescans.sh
-echo -e "\n[${GREEN}+${RESET}] resolving all ${YELLOW}hostnames${RESET} in targets.ip"
-masscanResolver
-echo -e "\n[${GREEN}+${RESET}] running a ${YELLOW}port scan${RESET} for all ip in alive.ip"
-portscanallports
-echo -e "\n[${GREEN}+${RESET}] running a ${YELLOW}parser${RESET} for the nse scanning"
-parser
-echo -e "\n[${GREEN}+${RESET}] running all then ${YELLOW}nse${RESET} scans "
-nse
+#source ./selectivescans.sh
+#source ./parser.sh
+#echo -e "\n[${GREEN}+${RESET}] resolving all ${YELLOW}hostnames${RESET} in targets.ip"
+#masscanResolver
+#echo -e "\n[${GREEN}+${RESET}] running a ${YELLOW}port scan${RESET} for all ip in alive.ip"
+#portscanallports
+#echo -e "\n[${GREEN}+${RESET}] running a ${YELLOW}parser${RESET} for the nse scanning"
+#parser
+#echo -e "\n[${GREEN}+${RESET}] running all then ${YELLOW}nse${RESET} scans "
+#nse

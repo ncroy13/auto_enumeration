@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# written by jthorpe6
+
 RED="\033[01;31m"
 GREEN="\033[01;32m"    
 YELLOW="\033[01;33m"   
@@ -92,4 +94,4 @@ scan(){
 }
 
 #-- call function
-scan
+#scan
