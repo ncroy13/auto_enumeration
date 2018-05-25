@@ -30,7 +30,7 @@ sudo ./autonmap.sh 256 2000
 or 
 
 #+BEGIN_SRC shell :results silent
-sudo ./masscan.sh 256 2000
+sudo ./automasscan.sh 100000
 #+END_SRC
 
 If you missed the arguments to the script you /should/ be asked for them.
