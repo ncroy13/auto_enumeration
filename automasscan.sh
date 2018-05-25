@@ -67,18 +67,18 @@ fi
 masscanResolver(){
     for item in $(cat ./targets.ip);
     do
-	if [ $(dig +short $item |wc -l) -eq '0' ];
+	if [ $(dig +short $item | wc -l) -eq '0' ];
 	then
-	    echo -e $item >> masscan/alive.ip
+	    echo -e $item >> masscan/resolv.ip
 	else
-	    echo -e "$(dig +short $item | sort -u| tr -s ' ' '\n')" >> masscan/alive.ip
+	    echo -e "$(dig +short $item | sort -u | tr -s ' ' '\n')" >> masscan/resolv.ip
 	fi
     done
     
 }
 
 portscanallports(){
-    masscan --open -iL masscan/alive.ip \
+    masscan --open -iL masscan/resolv.ip \
 	 -oG masscan/scans/portscanAll.gnmap -v \
 	 -p 0-65535 \
 	 --max-rate=$MAXRATE

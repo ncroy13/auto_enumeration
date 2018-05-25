@@ -11,8 +11,10 @@ RESET="\033[00m"
 
 combiner(){
     touch alive.ip
+    touch masscan/alive.ip
     cp masscan/scans/* scans
     cp nmap/scans/* scans
+    cat masscan/scans/portscanAll.gnmap | head -n -1 test.gnmap | tail -n +3 | cut -d ' ' -f 2 | sort -u > masscan/alive.ip
     cat masscan/alive.ip nmap/alive.ip | sort -u >> alive.ip
 }
 

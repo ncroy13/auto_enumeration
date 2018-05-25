@@ -71,31 +71,12 @@ then
     mkdir -p ./masscan/scans/
 fi
 
-if [ ! -d ./masscan/open-ports ]
-then
-    mkdir -p ./masscan/open-ports
-fi
-
-if [ ! -d ./masscan/nse_scans ]
-then
-    mkdir -p ./masscan/nse_scans
-fi
-
 #nmap
 if [ ! -d ./nmap/scans ]
 then
     mkdir -p ./nmap/scans/
 fi
 
-if [ ! -d ./nmap/open-ports ]
-then
-    mkdir -p ./nmap/open-ports
-fi
-
-if [ ! -d ./nmap/nse_scans ]
-then
-    mkdir -p ./nmap/nse_scans
-fi
 
 #-- rate variables
 MINHOST=$1
