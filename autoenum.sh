@@ -126,12 +126,12 @@ then
 fi
 
 #-- sources
-./automasscan.sh
-./autonmap.sh
-./selectivescans.sh
-./other_scans.sh
-./parser.sh
-./summary.sh
+source ./automasscan.sh
+source ./autonmap.sh
+source ./selectivescans.sh
+source ./other_scans.sh
+source ./parser.sh
+source ./summary.sh
 
 #-- call functions
 # nmap
