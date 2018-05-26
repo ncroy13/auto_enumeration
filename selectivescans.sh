@@ -2,44 +2,44 @@
 
 # written by @jthorpe6
 
-RED="\033[01;31m"
-GREEN="\033[01;32m"    
-YELLOW="\033[01;33m"   
-BLUE="\033[01;34m"     
-BOLD="\033[01;01m"     
-RESET="\033[00m" 
-
-#-- check for root or exit
-if [ $EUID != 0 ]
-then
-    echo -e "\n[${RED}!${RESET}] must be ${RED}root${RESET}"
-    exit 1
-fi
-
-#-- check for nmap
-if ! which nmap > /dev/null
-then
-    echo -e "\n[${RED}!${RESET}] nmap ${RED}not${RESET} found"
-    exit 1
-fi
-
-MINHOST=$1
-if  [[ -z "$MINHOST" ]]; then
-    read -p "--min-hostgroup (256): " MINHOST
-fi
-if [[ -z "$MINHOST" ]];
-then
-    MINHOST=256
-fi
-
-MINRATE=$2
-if  [[ -z "$MINRATE" ]]; then
-    read -p "--min-rate (2000): " MINRATE
-fi
-if [[ -z "$MINRATE" ]];
-then
-    MINRATE=2000
-fi
+#RED="\033[01;31m"
+#GREEN="\033[01;32m"    
+#YELLOW="\033[01;33m"   
+#BLUE="\033[01;34m"     
+#BOLD="\033[01;01m"     
+#RESET="\033[00m" 
+#
+##-- check for root or exit
+#if [ $EUID != 0 ]
+#then
+#    echo -e "\n[${RED}!${RESET}] must be ${RED}root${RESET}"
+#    exit 1
+#fi
+#
+##-- check for nmap
+#if ! which nmap > /dev/null
+#then
+#    echo -e "\n[${RED}!${RESET}] nmap ${RED}not${RESET} found"
+#    exit 1
+#fi
+#
+#MINHOST=$1
+#if  [[ -z "$MINHOST" ]]; then
+#    read -p "--min-hostgroup (256): " MINHOST
+#fi
+#if [[ -z "$MINHOST" ]];
+#then
+#    MINHOST=256
+#fi
+#
+#MINRATE=$2
+#if  [[ -z "$MINRATE" ]]; then
+#    read -p "--min-rate (2000): " MINRATE
+#fi
+#if [[ -z "$MINRATE" ]];
+#then
+#    MINRATE=2000
+#fi
 
 #parser(){
 #    cat scans/*.gnmap | awk '/ 21\/open\/tcp/{print $2}' | tee -a open-ports/21.txt >/dev/null

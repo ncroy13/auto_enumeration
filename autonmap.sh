@@ -2,69 +2,69 @@
 
 # written by @ncroy13 in collaboration with @jthorpe6
 
-RED="\033[01;31m"
-GREEN="\033[01;32m"    
-YELLOW="\033[01;33m"   
-BLUE="\033[01;34m"     
-BOLD="\033[01;01m"     
-RESET="\033[00m" 
-
-#-- check for root or exit
-if [ $EUID != 0 ]
-then
-    echo -e "\n[${RED}!${RESET}] must be ${RED}root${RESET}"
-    exit 1
-fi
-
-#-- check for nmap
-if ! which nmap > /dev/null
-then
-    echo -e "\n[${RED}!${RESET}] nmap ${RED}not${RESET} found"
-    exit 1
-fi
-
-#-- file/folder setup
-if [ ! -f ./targets.ip ]
-then
-    touch ./targets.ip
-    touch ./exclude.ip
-    echo -e "\n[${GREEN}+${RESET}] populate the ${YELLOW}targets.ip${RESET} file"
-    echo -e "\n[${GREEN}+${RESET}] populate the ${YELLOW}exclude.ip${RESET} file"
-    exit 1
-fi
-
-if [ ! -d ./nmap/scans ]
-then
-    mkdir -p ./nmap/scans/
-fi
-
-if [ ! -d ./nmap/open-ports ]
-then
-    mkdir -p ./nmap/open-ports
-fi
-
-if [ ! -d ./nmap/nse_scans ]
-then
-    mkdir -p ./nmap/nse_scans
-fi
-
-MINHOST=$1
-if  [[ -z "$MINHOST" ]]; then
-    read -p "--min-hostgroup (256): " MINHOST
-fi
-if [[ -z "$MINHOST" ]];
-then
-    MINHOST=256
-fi
-
-MINRATE=$2
-if  [[ -z "$MINRATE" ]]; then
-    read -p "--min-rate (2000): " MINRATE
-fi
-if [[ -z "$MINRATE" ]];
-then
-    MINRATE=2000
-fi
+#RED="\033[01;31m"
+#GREEN="\033[01;32m"    
+#YELLOW="\033[01;33m"   
+#BLUE="\033[01;34m"     
+#BOLD="\033[01;01m"     
+#RESET="\033[00m" 
+#
+##-- check for root or exit
+#if [ $EUID != 0 ]
+#then
+#    echo -e "\n[${RED}!${RESET}] must be ${RED}root${RESET}"
+#    exit 1
+#fi
+#
+##-- check for nmap
+#if ! which nmap > /dev/null
+#then
+#    echo -e "\n[${RED}!${RESET}] nmap ${RED}not${RESET} found"
+#    exit 1
+#fi
+#
+##-- file/folder setup
+#if [ ! -f ./targets.ip ]
+#then
+#    touch ./targets.ip
+#    touch ./exclude.ip
+#    echo -e "\n[${GREEN}+${RESET}] populate the ${YELLOW}targets.ip${RESET} file"
+#    echo -e "\n[${GREEN}+${RESET}] populate the ${YELLOW}exclude.ip${RESET} file"
+#    exit 1
+#fi
+#
+#if [ ! -d ./nmap/scans ]
+#then
+#    mkdir -p ./nmap/scans/
+#fi
+#
+#if [ ! -d ./nmap/open-ports ]
+#then
+#    mkdir -p ./nmap/open-ports
+#fi
+#
+#if [ ! -d ./nmap/nse_scans ]
+#then
+#    mkdir -p ./nmap/nse_scans
+#fi
+#
+#MINHOST=$1
+#if  [[ -z "$MINHOST" ]]; then
+#    read -p "--min-hostgroup (256): " MINHOST
+#fi
+#if [[ -z "$MINHOST" ]];
+#then
+#    MINHOST=256
+#fi
+#
+#MINRATE=$2
+#if  [[ -z "$MINRATE" ]]; then
+#    read -p "--min-rate (2000): " MINRATE
+#fi
+#if [[ -z "$MINRATE" ]];
+#then
+#    MINRATE=2000
+#fi
 
 #-- functions go here
 pingsweep(){

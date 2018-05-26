@@ -37,6 +37,20 @@ then
     exit 1
 fi
 
+#-- check for ike-scan
+if ! which ike-scan > /dev/null
+then
+    echo -e "\n[${RED}!${RESET}] ike-scan ${RED}not${RESET} found"
+    exit 1
+fi
+
+#-- check for curl
+if ! which curl > /dev/null
+then
+    echo -e "\n[${RED}!${RESET}] curl ${RED}not${RESET} found"
+    exit 1
+fi
+
 #-- file/folder setup
 # general
 if [ ! -f ./targets.ip ]
@@ -56,8 +70,6 @@ fi
 if [ ! -d ./open-ports ]
 then
     mkdir -p ./open-ports
-    touch ./open-ports/443.txt    
-    touch ./open-ports/500.txt
 fi
 
 if [ ! -d ./nse_scans ]

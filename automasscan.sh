@@ -2,67 +2,67 @@
 
 # written by @jthorpe6
 
-RED="\033[01;31m"
-GREEN="\033[01;32m"    
-YELLOW="\033[01;33m"   
-BLUE="\033[01;34m"     
-BOLD="\033[01;01m"     
-RESET="\033[00m" 
-
-#-- check for root or exit
-if [ $EUID != 0 ]
-then
-    echo -e "\n[${RED}!${RESET}] must be ${RED}root${RESET}"
-    exit 1
-fi
-
-#-- check for masscan
-if ! which masscan > /dev/null
-then
-    echo -e "\n[${RED}!${RESET}] masscan ${RED}not${RESET} found"
-    exit 1
-fi
-
-#-- check for dig
-if ! which dig > /dev/null
-then
-    echo -e "\n[${RED}!${RESET}] dig ${RED}not${RESET} found"
-    exit 1
-fi
-
-#-- file/folder setup
-if [ ! -f ./targets.ip ]
-then
-    touch ./targets.ip
-    touch ./exclude.ip
-    echo -e "\n[${GREEN}+${RESET}] populate the ${YELLOW}targets.ip${RESET} file"
-    echo -e "\n[${GREEN}+${RESET}] populate the ${YELLOW}exclude.ip${RESET} file"
-    exit 1
-fi
-
-if [ ! -d ./masscan/scans ]
-then
-    mkdir -p ./masscan/scans/
-fi
-
-if [ ! -d ./masscan/open-ports ]
-then
-    mkdir -p ./masscan/open-ports
-fi
-
-if [ ! -d ./masscan/nse_scans ]
-then
-    mkdir -p ./masscan/nse_scans
-fi
-
-MAXRATE=$1
-if  [[ -z "$MAXRATE" ]]; then
-    read -p "--max-rate (100000): " MAXRATE
-fi
-if [[ -z "$MAXRATE" ]];
-then
-    MAXRATE=100000
-fi
+#RED="\033[01;31m"
+#GREEN="\033[01;32m"    
+#YELLOW="\033[01;33m"   
+#BLUE="\033[01;34m"     
+#BOLD="\033[01;01m"     
+#RESET="\033[00m" 
+#
+##-- check for root or exit
+#if [ $EUID != 0 ]
+#then
+#    echo -e "\n[${RED}!${RESET}] must be ${RED}root${RESET}"
+#    exit 1
+#fi
+#
+##-- check for masscan
+#if ! which masscan > /dev/null
+#then
+#    echo -e "\n[${RED}!${RESET}] masscan ${RED}not${RESET} found"
+#    exit 1
+#fi
+#
+##-- check for dig
+#if ! which dig > /dev/null
+#then
+#    echo -e "\n[${RED}!${RESET}] dig ${RED}not${RESET} found"
+#    exit 1
+#fi
+#
+##-- file/folder setup
+#if [ ! -f ./targets.ip ]
+#then
+#    touch ./targets.ip
+#    touch ./exclude.ip
+#    echo -e "\n[${GREEN}+${RESET}] populate the ${YELLOW}targets.ip${RESET} file"
+#    echo -e "\n[${GREEN}+${RESET}] populate the ${YELLOW}exclude.ip${RESET} file"
+#    exit 1
+#fi
+#
+#if [ ! -d ./masscan/scans ]
+#then
+#    mkdir -p ./masscan/scans/
+#fi
+#
+#if [ ! -d ./masscan/open-ports ]
+#then
+#    mkdir -p ./masscan/open-ports
+#fi
+#
+#if [ ! -d ./masscan/nse_scans ]
+#then
+#    mkdir -p ./masscan/nse_scans
+#fi
+#
+#MAXRATE=$1
+#if  [[ -z "$MAXRATE" ]]; then
+#    read -p "--max-rate (100000): " MAXRATE
+#fi
+#if [[ -z "$MAXRATE" ]];
+#then
+#    MAXRATE=100000
+#fi
 
 masscanResolver(){
     for item in $(cat ./targets.ip);
