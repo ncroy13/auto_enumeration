@@ -5,3 +5,6 @@ open-ports
 scans
 open-ports/*
 scans/*
+masscan/*
+nmap/*
+nse_scans/*
