@@ -1,6 +1,6 @@
-#+TITLE: Autonmap_bash
+#+TITLE: Auto_enumeration
 
-- Rewirte of [[https://github.com/sno0ose/auto_nmap][auto_nmap]]
+- Rewirte of [[https://github.com/sno0ose/auto_nmap][auto_nmap]] and autonmap_bash
 
 * Usage
 First run =autoenum.sh=
@@ -18,7 +18,7 @@ echo "192.168.100.0/24" >> targets.ip
 Finally run =autoenum.sh= again
 
 #+BEGIN_SRC shell :results silent
-sudo ./autoenum.sh 256 2000 100000
+sudo ./autoenum.sh 50 500 500
 #+END_SRC
 
 If you missed the arguments to the script you /should/ be asked for them.
