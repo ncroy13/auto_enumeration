@@ -93,29 +93,29 @@ fi
 #-- rate variables
 MINHOST=$1
 if  [[ -z "$MINHOST" ]]; then
-    read -p "--min-hostgroup (256): " MINHOST
+    read -p "--min-hostgroup (50): " MINHOST
 fi
 if [[ -z "$MINHOST" ]];
 then
-    MINHOST=256
+    MINHOST=50
 fi
 
 MINRATE=$2
 if  [[ -z "$MINRATE" ]]; then
-    read -p "--min-rate (2000): " MINRATE
+    read -p "--min-rate (500): " MINRATE
 fi
 if [[ -z "$MINRATE" ]];
 then
-    MINRATE=2000
+    MINRATE=500
 fi
 
 MAXRATE=$1
 if  [[ -z "$MAXRATE" ]]; then
-    read -p "--max-rate (100000): " MAXRATE
+    read -p "--max-rate (500): " MAXRATE
 fi
 if [[ -z "$MAXRATE" ]];
 then
-    MAXRATE=100000
+    MAXRATE=500
 fi
 
 #-- sources
